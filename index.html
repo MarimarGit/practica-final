@@ -11,7 +11,7 @@
 </head>
 <body>
     <header>
-        <h1>Sorteo del amigo invisible</h1>
+        <h1 class="text-light p-4 text-center">Sorteo del amigo invisible</h1>
     </header>
     <main>
         <section>
@@ -23,12 +23,16 @@
                 </div>
             </div>
 
-            <h3 class="alert alert-success">Listado de alumnos</h3>
-            <input type="text" id="nombres" class="form-control" value="Adrián, Rafa, Hector, Mar" />
-            <button class="btn btn-primary" onclick="obtenerNombres()">Hacer sorteo</button>
-
+            <h3 class="alert alert-success">Sorteo</h3>
+            <div class="container">
+                <input type="text" id="nombres" class="form-control" value="Adrián, Rafa, Hector, Mar" />
+                <button class="btn btn-success mt-4" onclick="obtenerNombres()">Hacer sorteo</button>
+            </div>
         </section>
     </main>
+    <footer>
+        <p class="text-light text-start mt-5 p-3">Creado por @ grupo2</p>
+    </footer>
     <script src="js/codigo.js"></script>
 </body>
 </html>
