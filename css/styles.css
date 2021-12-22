@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+body {
+  background-color:burlywood;
+}
+
+header {
+  font-size: 2em;
+  color:yellow;
+  background-color:green;
+  text-align:center;
+  padding-top: 1em;
+  padding-botton: 1em;
+}
+
+h1 {
+  color:orange;
+  font-weight: 500;
+}
+
+main {
+}
+
+section {
+}
+
+button {
+}
