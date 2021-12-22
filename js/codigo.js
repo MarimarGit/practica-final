@@ -19,8 +19,10 @@ function obtenerNombres() {
       arrayNombres[i] = arrayNombres[i].trim();
    }
    
-   var arrayRegaladores = arrayNombres;
+   //hago una copia del array de nombres
+   var arrayRegaladores = arrayNombres.slice();
 
+   //vamos uno por uno asignando regalador
    for (var j=0; j<= arrayNombres.length-1; j++) {
       var nombreRegalado = arrayNombres[j];
       
@@ -31,29 +33,17 @@ function obtenerNombres() {
       } while (nombreRegalado==nombreRegalador);
       
       console.log("Regalado: " + nombreRegalado + " - " + " Regalador: " + nombreRegalador);
-
-      
-
-    /*   //eliminamos al que ya ha regalado
-      var indice = arrayRegaladores.indexOf(nombreRegalador);
-      console.log("Indice: " + indice);
-
-      if (indice > -1) {
-         arrayRegaladores.splice(indice, 1);
-       }
-
-      
-      console.log("Los regaladores que quedan: ");
-      recorrerArray(arrayRegaladores);  */
- 
-
+      eliminarRegalador(arrayRegaladores, nombreRegalador);
    }
-
-  
 }
 
 
 
+/**
+ * Me da un nombre aleatorio de un array de nombres
+ * @param {*} array 
+ * @returns 
+ */
 function nombreAleatorio(array) {
    var numAleatorio = Math.floor(Math.random() * array.length);
   // console.log(numAleatorio);
@@ -61,20 +51,26 @@ function nombreAleatorio(array) {
    return nombreAleatorio;
 }
 
-
-
-
-function recorrerArray(array) {
-   for (var i=0; i<= array.length-1; i++) {
-      console.log(array[i]);
+/**
+ * Elimina un nombre de la lista de regaladores para que no se repitan
+ * @param {*} array 
+ * @returns 
+ */
+function eliminarRegalador(array, nombreRegalador) {
+   var indice = array.indexOf(nombreRegalador);
+   if (indice > -1) {
+      array.splice(indice, 1);
    }
+   console.log(array); 
 }
 
-/* 
-Adrian, Rafa , hector, Mar
-
-Adrian, Rafa , , Mar
-
-
-Adrian -->  2 --> hector
-Rafa --> 1 --> */
+/**
+ * Me da un nombre aleatorio de un array de nombres
+ * @param {*} array 
+ * @returns 
+ */
+function mostrarResultadoSorteo(array) {
+   var divResultado = document.querySelector("#resultadoSorteo");
+   divResultado.setAttribute('style', 'display:block'); //muestro el div de los resultados que inicialmente estaba oculto
+   divResultado.innerHTML = "aqui los resultados" + array[0];
+}
