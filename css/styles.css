@@ -30,3 +30,8 @@ button {
 footer {
   background-color:#358252;
 }
+
+ #resultadoSorteo {
+  display: none;
+  border: 1px solid white;
+} 
