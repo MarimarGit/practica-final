@@ -8,8 +8,6 @@ function inicio() {
    //aquí se empezaría a ejecutar nuestro código al cargar el DOM
 }
 
-
-
 function obtenerNombres() {
    //limpiamos todo lo que haya en el contenedor de anteriores sorteos
    inicializarContenedorResultados();
@@ -21,63 +19,54 @@ function obtenerNombres() {
    for (var i=0; i<= arrayNombres.length-1; i++) {
       arrayNombres[i] = arrayNombres[i].trim();
    }
-   
-   //hago una copia del array de nombres
-   var arrayRegaladores = arrayNombres.slice();
-   //preparo el array que contendrá el regalador definitivo
-   var arrayAsignado = [];
 
-   //vamos uno por uno asignando regalador
-   for (var j=0; j<= arrayNombres.length-1; j++) {
-      var nombreRegalado = arrayNombres[j];
-      
-      //busco un regalador aleatorio que no se repita
-      var nombreRegalador;
-      do {
-         nombreRegalador = nombreAleatorio(arrayRegaladores);
-      } while (nombreRegalado==nombreRegalador);
-      
-      //console.log("Regalado: " + nombreRegalado + " - " + " Regalador: " + nombreRegalador);
-      arrayAsignado[j] = nombreRegalador;
-      eliminarRegalador(arrayRegaladores, nombreRegalador);
-   }
+   //hago una copia del array de nombres para no tocar el original
+   var arrayNombresCopia = arrayNombres.slice();
+   //desordeno el array de forma aleatoria
+   var arrayNombresDesorden = desordenar(arrayNombresCopia);
+
+   //hago una copia del array de nombres desordenados
+   var arrayRegaladores = arrayNombresDesorden.slice();
+
+   //descuadro los arrays
+   //añado el primer elemento al final
+   arrayRegaladores.push(arrayRegaladores[0]);
+   //borro el primer elemento
+   arrayRegaladores.shift();
+
+   //mostramos en una columna el array de nombres y en otra los regaladores
+   mostrarResultadoSorteo(arrayNombresDesorden, arrayRegaladores);
 
 
-
-      for (i=0; i<=arrayNombres.length-1; i++) {
-         console.log(arrayNombres[i] + " - "  + arrayAsignado[i]);
-      }
-
-      mostrarResultadoSorteo(arrayNombres, arrayAsignado);
-
-
+   console.log("FINAL: " );
+   console.log(arrayNombres);
+   console.log(arrayNombresDesorden);
 }
-
 
 
 /**
- * Me da un nombre aleatorio de un array de nombres
+ * Desordena de forma aleatoria un array
  * @param {*} array 
  * @returns 
  */
-function nombreAleatorio(array) {
-   var numAleatorio = Math.floor(Math.random() * array.length);
-  // console.log(numAleatorio);
-   var nombreAleatorio = array[numAleatorio];
-   return nombreAleatorio;
-}
+function desordenar(array) {
+   for (var i = array.length - 1; i > 0; i--) {
+     var j = Math.floor(Math.random() * (i + 1)); // índice aleatorio entre 0 e i
+ 
+     // intercambia elementos array[i] y array[j]
+     // usamos la sintáxis "asignación de desestructuración" para lograr eso
+     // encontrarás más información acerca de esa sintaxis en los capítulos siguientes
+     // lo mismo puede ser escrito como:
+     // let t = array[i]; array[i] = array[j]; array[j] = t
+     //[array[i], array[j]] = [array[j], array[i]];
 
-/**
- * Elimina un nombre de la lista de regaladores para que no se repitan
- * @param {*} array 
- * @returns 
- */
-function eliminarRegalador(array, nombreRegalador) {
-   var indice = array.indexOf(nombreRegalador);
-   if (indice > -1) {
-      array.splice(indice, 1);
+     var t = array[i]; 
+     array[i] = array[j]; 
+     array[j] = t;
    }
-}
+   return array;
+ }
+ 
 /**
  * Limpia todo lo que haya en el contenedor de anteriores sorteos
  * @param {*} array 
@@ -92,14 +81,14 @@ function inicializarContenedorResultados() {
 }
 
 /**
- * Muestra los resultados del sorteo
+ * Muestra los resultados del sorteo en los input
  * @param {*} array 
  * @returns 
  */
 function mostrarResultadoSorteo(array1, array2) {
    var divResultado = document.querySelector("#resultadoSorteo");
    divResultado.setAttribute('style', 'display:block'); //muestro el div de los resultados que inicialmente estaba oculto
-   
+
    //muestro los inputs para cada pareja
    for (var i=0; i<=array1.length-1; i++) {
       anadirParejaInput(array1[i] , array2[i]);

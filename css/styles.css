@@ -5,26 +5,17 @@ body {
 }
 
 header h1 {
-  font-size: 2em;
+  /*font-size: 2em;
   color:yellow;
-  /*background-color:green;*/
+  background-color:green;
   text-align:center;
   padding-top: 1em;
-  padding-botton: 1em;
+  padding-bottom: 1em;*/
 }
 
 h1 {
   color:orange;
   font-weight: 500;
-}
-
-main {
-}
-
-section {
-}
-
-button {
 }
 
 footer {
